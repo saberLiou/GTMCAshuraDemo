@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasEnabled;
+    use HasEnabled,
+        HasTranslations;
 
     /**
      * {@inheritDoc}
@@ -18,6 +19,19 @@ class Category extends Model
         'enabled',
     ];
 
+    /**
+     * {@inheritDoc}
+     */
+    protected $casts = [
+        'name' => 'array',
+        'description' => 'array',
+    ];
+
+    /**
+     * Get the posts of the category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function posts()
     {
         return $this->belongsToMany(Post::class);

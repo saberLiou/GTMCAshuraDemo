@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PostTranslation extends Model
+class CategoryTranslation extends Model
 {
     use HasEnabled,
         HasTranslated;

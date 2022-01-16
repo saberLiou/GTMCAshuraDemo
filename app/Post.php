@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    use HasEnabled;
+    use HasEnabled,
+        HasTranslations;
 
     /**
      * {@inheritDoc}
@@ -18,11 +19,19 @@ class Post extends Model
         'enabled',
     ];
 
-    public function getVirtualNameAttribute()
-    {
-        return 'abc';
-    }
+    /**
+     * {@inheritDoc}
+     */
+    protected $casts = [
+        'name' => 'array',
+        'description' => 'array',
+    ];
 
+    /**
+     * Get the categories of the post.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function categories()
     {
         return $this->belongsToMany(Category::class);
